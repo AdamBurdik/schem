@@ -7,25 +7,54 @@ it always writes as Sponge schematics version 1.
 
 ## Install
 
-Schem is available on [maven central](https://search.maven.org/search?q=g:dev.hollowcube%20AND%20a:schem).
+This fork of schem is not available on Maven Central. To use it in your project:
 
+1. Clone the repository and build the JAR locally:
+```bash
+  git clone https://github.com/AdamBurdik/schem.git
+  cd schem
+  ./gradlew build
+```
+2. Locate the built jar file in the build/libs directory.
+3. Add the jar to your project libs directory
+4. Include the jar as a dependency:
 ```groovy
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    implementation 'dev.hollowcube:schem:<see releases>'
+    implementation files("libs/schem-<version>.jar")
 }
 ```
 
 ## Usage
 
-todo add me
+Loading schematic from file
+```java
+SchematicReader reader = new SchematicReader();
+Schematic = reader.read(Path.of("path/to/schematic.sponge3"));
+```
 
-## Contributing
+Saving schematic to file
+```java
+SchematicWriter writer = new SchematicWriter();
+writer.write(schematic, Path.of("path/to/save/schematic.sponge3");
+```
 
-Contributions via PRs and issues are always welcome.
+Pasting schematic to instance
+```java
+RelativeBatch batch = schematic.build(Rotation.NONE, true);
+batch.apply(instance, callback);
+```
+
+Creating schematic in instance
+```java
+SchematicBuilder builder = new SchematicBuilder();
+builder.addBlock(0, 0, 0, block);
+builder.setOffset(0, 5, 0);
+
+Schematic schematic = builder.build();
+```
+
+## Credits
+This is just fork of the original [schem library](https://github.com/hollow-cube/schem) to support minestom 1.21.2 and improve some stuff
 
 ## License
 

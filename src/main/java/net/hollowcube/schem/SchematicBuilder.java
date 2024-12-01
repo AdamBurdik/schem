@@ -2,10 +2,10 @@ package net.hollowcube.schem;
 
 import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import net.hollowcube.schem.utils.Utils;
 import net.minestom.server.coordinate.Point;
 import net.minestom.server.coordinate.Vec;
 import net.minestom.server.instance.block.Block;
-import net.minestom.server.utils.Utils;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.ByteBuffer;
@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-@SuppressWarnings("UnstableApiUsage")
 public class SchematicBuilder {
 
     // Point -> Block, a missing value is air
@@ -77,9 +76,9 @@ public class SchematicBuilder {
                 blockBytes.put(oldBytes);
             }
 
-            int index = i, width = size.blockX(), length = size.blockZ();
-            int y = index / (width * length);
-            int remainder = index - (y * width * length);
+            int width = size.blockX(), length = size.blockZ();
+            int y = i / (width * length);
+            int remainder = i - (y * width * length);
             int z = remainder / width;
             int x = remainder - z * width;
 
